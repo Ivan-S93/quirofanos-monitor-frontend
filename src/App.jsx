@@ -53,6 +53,13 @@ export default function App() {
     return `${minutos} min ${segundos} s`;
   };
 
+  const quirofanosOrdenados = [...quirofanos].sort((a, b) => {
+  const na = parseInt(a.nombre.replace(/\D/g, ""));
+  const nb = parseInt(b.nombre.replace(/\D/g, ""));
+  return na - nb;
+  });
+
+
   return (
     <div className="bg-gray-900 min-h-screen text-white p-6">
       <h1 className="text-4xl font-bold mb-6 text-center">
@@ -60,7 +67,7 @@ export default function App() {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {quirofanos.map(q => {
+        {quirofanosOrdenados.map(q => {
           const cirugia = q.cirugiaActiva;
           const progreso = calcularProgreso(cirugia);
           const tiempo = tiempoTranscurrido(cirugia);
